@@ -9,12 +9,12 @@
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Binod - Projects and certificates</title>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <title>Binod - Projects and Certificates</title>
+
     <!-- Standard Favicon -->
     <link rel="icon" href="favicons/favicon.ico" type="image/x-icon" />
-
-    <!-- PNG Favicons for modern browsers -->
     <link
       rel="icon"
       type="image/png"
@@ -27,7 +27,6 @@
       sizes="32x32"
       href="favicons/favicon-32x32.png"
     />
-
     <link
       rel="icon"
       type="image/png"
@@ -41,7 +40,35 @@
       href="favicons/android-chrome-512x512.png"
     />
 
-    <!-- Favicon -->
+    <style>
+      body {
+        overflow-x: hidden; /* Prevent horizontal scroll issues */
+      }
+      .project-card,
+      .certificate-card {
+        opacity: 0; /* Initial state for animation */
+        transform: translateY(50px);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .project-card:hover,
+      .certificate-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      .nav-link {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      .fallback-hidden {
+        opacity: 1 !important; /* Fallback for content if JS fails */
+        transform: translateY(0) !important;
+      }
+      img {
+        display: block; /* Ensure images are visible */
+        width: 100%;
+        height: auto;
+      }
+    </style>
   </head>
   <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
     <!-- Navigation -->
@@ -51,17 +78,18 @@
       >
         <a
           href="index.html"
-          class="flex items-center space-x-3 rtl:space-x-reverse"
+          class="flex items-center space-x-3 rtl:space-x-reverse logo"
         >
           <img
             src="images/binod.jpg"
             class="h-8 rounded-full"
             alt="Binod Logo"
+            onerror="this.src='https://via.placeholder.com/32';"
           />
           <span
             class="self-center text-2xl font-semibold whitespace-nowrap text-purple-600 dark:text-purple-400"
           >
-            <pre> < Binod/></pre>
+            <pre> &lt; Binod/&gt;</pre>
           </span>
         </a>
         <button
@@ -95,28 +123,28 @@
             <li>
               <a
                 href="index.html"
-                class="block py-2 px-3 text-gray-900 rounded-md hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-600 md:p-0 dark:text-white md:dark:hover:text-purple-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                class="nav-link block py-2 px-3 text-gray-900 rounded-md hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-600 md:p-0 dark:text-white md:dark:hover:text-purple-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >Home</a
               >
             </li>
             <li>
               <a
                 href="about.html"
-                class="block py-2 px-3 text-gray-900 rounded-md hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-600 md:p-0 dark:text-white md:dark:hover:text-purple-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                class="nav-link block py-2 px-3 text-gray-900 rounded-md hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-600 md:p-0 dark:text-white md:dark:hover:text-purple-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >About</a
               >
             </li>
             <li>
               <a
                 href="skills.html"
-                class="block py-2 px-3 text-gray-900 rounded-md hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-600 md:p-0 dark:text-white md:dark:hover:text-purple-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                class="nav-link block py-2 px-3 text-gray-900 rounded-md hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-600 md:p-0 dark:text-white md:dark:hover:text-purple-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >Skills</a
               >
             </li>
             <li>
               <a
                 href="projects.html"
-                class="block py-2 px-3 text-white bg-purple-600 rounded-md md:bg-transparent md:text-purple-600 md:p-0 dark:text-purple-400 md:dark:text-purple-400"
+                class="nav-link block py-2 px-3 text-white bg-purple-600 rounded-md md:bg-transparent md:text-purple-600 md:p-0 dark:text-purple-400 md:dark:text-purple-400"
                 aria-current="page"
                 >Projects</a
               >
@@ -124,7 +152,7 @@
             <li>
               <a
                 href="contact.html"
-                class="block py-2 px-3 text-gray-900 rounded-md hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-600 md:p-0 dark:text-white md:dark:hover:text-purple-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                class="nav-link block py-2 px-3 text-gray-900 rounded-md hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-600 md:p-0 dark:text-white md:dark:hover:text-purple-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >Contact</a
               >
             </li>
@@ -134,22 +162,27 @@
     </nav>
 
     <!-- Projects Section -->
-    <section class="py-16 max-w-screen-xl mx-auto px-4">
+    <section class="py-16 max-w-screen-xl mx-auto px-4 projects-section">
       <h2
-        class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-8 text-center"
+        class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-8 text-center section-title"
       >
         My Projects
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Project Card 1 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="project-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
           <a
             href="https://github.com/Just-Binod/NoteSharingSystem/tree/virtualbranch"
             target="_blank"
           >
-            <img class="rounded-t-lg" src="images/nss.jpg" alt="Project 1" />
+            <img
+              class="rounded-t-lg"
+              src="images/nss.jpg"
+              alt="Note Sharing System"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Note+Sharing+System';"
+            />
           </a>
           <div class="p-5">
             <a
@@ -159,19 +192,19 @@
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
-                Note sharing System
+                Note Sharing System
               </h5>
             </a>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
               A full-stack project built with Django, featuring user
-              authentication an role base access control.
+              authentication and role-based access control.
             </p>
             <a
-              target="_blank"
               href="https://github.com/Just-Binod/NoteSharingSystem/tree/virtualbranch"
+              target="_blank"
               class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700"
             >
-              Github Repo:
+              GitHub Repo
               <svg
                 class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
                 aria-hidden="true"
@@ -192,7 +225,7 @@
         </div>
         <!-- Project Card 2 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="project-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
           <a
             href="https://just-binod.github.io/Binods_portfolio/"
@@ -201,7 +234,8 @@
             <img
               class="rounded-t-lg"
               src="images/portfolio.jpg"
-              alt="Project 2"
+              alt="Portfolio Website"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Portfolio+Website';"
             />
           </a>
           <div class="p-5">
@@ -245,86 +279,39 @@
         </div>
         <!-- Project Card 3 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-        >
-          <a href="https://github.com/Just-Binod/Student_management_sys_java"  target="_blank">
-            <img
-              class="rounded-t-lg"
-              src="images/student.jpg"
-              alt="Project 3"
-            />
-          </a>
-          <div class="p-5">
-            <a
-              href="https://github.com/Just-Binod/Student_management_sys_java"
-              target="_blank"
-            >
-              <h5
-                class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
-              >
-                Java-Student mangement system
-              </h5>
-            </a>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              A project of Springboot and java> Student Management System
-            </p>
-            <a
-              href="https://github.com/Just-Binod/Student_management_sys_java"
-              target="_blank"
-              class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700"
-            >
-              GitHub Repo:
-              <svg
-                class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 14 10"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M1 5h12m0 0L9 1m4 4L9 9"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="project-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
           <a
-            href="https://github.com/Just-Binod/password_generator_django"
+            href="https://github.com/Just-Binod/Student_management_sys_java"
             target="_blank"
           >
             <img
               class="rounded-t-lg"
-              src="images/passwordgen.jpg"
-              alt="Project 2"
+              src="images/student.jpg"
+              alt="Java-Student Management System"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Student+Management+System';"
             />
           </a>
           <div class="p-5">
             <a
-              href="https://github.com/Just-Binod/password_generator_django"
+              href="https://github.com/Just-Binod/Student_management_sys_java"
               target="_blank"
             >
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
-                Password Generator
+                Java-Student Management System
               </h5>
             </a>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              PassWord generator Using Django
+              A project of Spring Boot and Java: Student Management System
             </p>
             <a
-              href="https://github.com/Just-Binod/password_generator_django"
+              href="https://github.com/Just-Binod/Student_management_sys_java"
               target="_blank"
               class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700"
             >
-            GitHub Repo:
+              GitHub Repo
               <svg
                 class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
                 aria-hidden="true"
@@ -345,7 +332,60 @@
         </div>
         <!-- Project Card 4 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="project-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        >
+          <a
+            href="https://github.com/Just-Binod/password_generator_django"
+            target="_blank"
+          >
+            <img
+              class="rounded-t-lg"
+              src="images/passwordgen.jpg"
+              alt="Password Generator"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Password+Generator';"
+            />
+          </a>
+          <div class="p-5">
+            <a
+              href="https://github.com/Just-Binod/password_generator_django"
+              target="_blank"
+            >
+              <h5
+                class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
+              >
+                Password Generator
+              </h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+              Password Generator Using Django
+            </p>
+            <a
+              href="https://github.com/Just-Binod/password_generator_django"
+              target="_blank"
+              class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700"
+            >
+              GitHub Repo
+              <svg
+                class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 10"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5h12m0 0L9 1m4 4L9 9"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <!-- Project Card 5 -->
+        <div
+          class="project-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
           <a
             href="https://github.com/Just-Binod/snakegame-in-python"
@@ -354,7 +394,8 @@
             <img
               class="rounded-t-lg"
               src="images/snake.jpg"
-              alt="Project 2"
+              alt="Snake Game"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Snake+Game';"
             />
           </a>
           <div class="p-5">
@@ -376,7 +417,7 @@
               target="_blank"
               class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700"
             >
-            GitHub Repo:
+              GitHub Repo
               <svg
                 class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
                 aria-hidden="true"
@@ -395,8 +436,9 @@
             </a>
           </div>
         </div>
+        <!-- Project Card 6 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="project-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
           <a
             href="https://github.com/Just-Binod/weather_django_basic"
@@ -405,7 +447,8 @@
             <img
               class="rounded-t-lg"
               src="images/weather.jpg"
-              alt="Project 2"
+              alt="Weather Web App"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Weather+App';"
             />
           </a>
           <div class="p-5">
@@ -416,18 +459,18 @@
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
-                Weather web app
+                Weather Web App
               </h5>
             </a>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              Weather Appr Using Django
+              Weather App Using Django
             </p>
             <a
               href="https://github.com/Just-Binod/weather_django_basic"
               target="_blank"
               class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700"
             >
-            GitHub Repo:
+              GitHub Repo
               <svg
                 class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
                 aria-hidden="true"
@@ -446,10 +489,9 @@
             </a>
           </div>
         </div>
-        <!-- Project Card 4 -->
-
-         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        <!-- Project Card 7 -->
+        <div
+          class="project-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
           <a
             href="https://feedback-collector-binod.lovable.app/"
@@ -458,7 +500,8 @@
             <img
               class="rounded-t-lg"
               src="images/feedback.jpg"
-              alt="Project 2"
+              alt="Feedback Rating System"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Feedback+System';"
             />
           </a>
           <div class="p-5">
@@ -469,14 +512,14 @@
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
-                Feedback Rating  system
+                Feedback Rating System
               </h5>
             </a>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              just "VIBE CODED" an full stack web app using LOVABLE & SUPABASE.
+              Just "VIBE CODED" a full stack web app using LOVABLE & SUPABASE.
             </p>
             <a
-              href="https://feedback-collector-binod.lovable.app"
+              href="https://feedback-collector-binod.lovable.app/"
               target="_blank"
               class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700"
             >
@@ -499,219 +542,207 @@
             </a>
           </div>
         </div>
-        <!--from heree-->
-
       </div>
-       
-         
-        
     </section>
 
-
-
-    <!--https://github.com/Just-Binod/snakegame-in-python-->
-    <!--Certificate  section-->
-    <!-- Projects Section -->
-    <section class="py-16 max-w-screen-xl mx-auto px-4">
+    <!-- Certificates Section -->
+    <section class="py-16 max-w-screen-xl mx-auto px-4 certificates-section">
       <h2
-        class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-8 text-center"
+        class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-8 text-center section-title"
       >
         My Certificates
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- certificate Card 1 -->
+        <!-- Certificate Card 1 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="certificate-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <a 
-            href="certificates/gitandgithub.jpg" target="_blank"
-          >
-            <img class="rounded-t-lg" src="certificates/gitandgithub.jpg" alt="certificate 1" />
+          <a href="certificates/gitandgithub.jpg" target="_blank">
+            <img
+              class="rounded-t-lg"
+              src="certificates/gitandgithub.jpg"
+              alt="Git and GitHub Workshop"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Git+Workshop';"
+            />
           </a>
           <div class="p-5">
-            <a
-              href="certificates/gitandgithub.jpg"
-              target="_blank"
-            >
+            <a href="certificates/gitandgithub.jpg" target="_blank">
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
-                3-Days Git and GitHub Workshop 
+                3-Days Git and GitHub Workshop
               </h5>
-            </a>
             </a>
           </div>
         </div>
-        <!-- Project Card 2 -->
+        <!-- Certificate Card 2 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="certificate-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <a 
-            href="certificates/appreation3rdsem.jpg" target="_blank"
-          >
-            <img class="rounded-t-lg" src="certificates/appreation3rdsem.jpg" alt="certificate 1" />
+          <a href="certificates/appreation3rdsem.jpg" target="_blank">
+            <img
+              class="rounded-t-lg"
+              src="certificates/appreation3rdsem.jpg"
+              alt="Certificate of Appreciation"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Appreciation';"
+            />
           </a>
           <div class="p-5">
-            <a
-              href="certificates/appreation3rdsem.jpg"
-              target="_blank"
-            >
+            <a href="certificates/appreation3rdsem.jpg" target="_blank">
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
                 Certificate of Appreciation
               </h5>
             </a>
-            </a>
           </div>
         </div>
-        <!-- Project Card 3 -->
+        <!-- Certificate Card 3 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="certificate-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <a 
-            href="certificates/seo certificate.webp" target="_blank"
-          >
-            <img class="rounded-t-lg" src="certificates/seo certificate.webp" alt="certificate 1" />
+          <a href="certificates/seo certificate.webp" target="_blank">
+            <img
+              class="rounded-t-lg"
+              src="certificates/seo certificate.webp"
+              alt="Basic SEO Course"
+              onerror="this.src='https://via.placeholder.com/300x200?text=SEO+Course';"
+            />
           </a>
           <div class="p-5">
-            <a
-              href="certificates/seo certificate.webp.jpg"
-              target="_blank"
-            >
+            <a href="certificates/seo certificate.webp" target="_blank">
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
-                Basic SEO course 
+                Basic SEO Course
               </h5>
-            </a>
             </a>
           </div>
         </div>
-        <!-- Project Card 4 -->
+        <!-- Certificate Card 4 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="certificate-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <a 
-            href="certificates/AI.pdf" target="_blank"
-          >
-            <img class="rounded-t-lg" src="certificates/Artificial.jpg" alt="certificate 1" />
+          <a href="certificates/AI.pdf" target="_blank">
+            <img
+              class="rounded-t-lg"
+              src="certificates/Artificial.jpg"
+              alt="Artificial Intelligence Course"
+              onerror="this.src='https://via.placeholder.com/300x200?text=AI+Course';"
+            />
           </a>
           <div class="p-5">
-            <a
-              href="certificates/AI.pdf"
-              target="_blank"
-            >
+            <a href="certificates/AI.pdf" target="_blank">
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
-                Artificial Intelligence (AI) Basic course 
+                Artificial Intelligence (AI) Basic Course
               </h5>
-            </a>
             </a>
           </div>
         </div>
-        <!--5th course-->
+        <!-- Certificate Card 5 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="certificate-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <a 
-            href="certificates/cybersecurity.pdf" target="_blank"
-          >
-            <img class="rounded-t-lg" src="certificates/cyber.jpg" alt="certificate 1" />
+          <a href="certificates/cybersecurity.pdf" target="_blank">
+            <img
+              class="rounded-t-lg"
+              src="certificates/cyber.jpg"
+              alt="Cyber Security Course"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Cyber+Security';"
+            />
           </a>
           <div class="p-5">
-            <a
-              href="certificates/cybersecurity.pdf"
-              target="_blank"
-            >
+            <a href="certificates/cybersecurity.pdf" target="_blank">
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
-                Cyber Security course 
+                Cyber Security Course
               </h5>
-            </a>
             </a>
           </div>
         </div>
-        <!--6th-->
+        <!-- Certificate Card 6 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="certificate-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <a 
-            href="certificates/gen ai.png" target="_blank"
-          >
-            <img class="rounded-t-lg" src="certificates/gen ai.png" alt="certificate 1" />
+          <a href="certificates/gen ai.png" target="_blank">
+            <img
+              class="rounded-t-lg"
+              src="certificates/gen ai.png"
+              alt="Basic GEN AI Course"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Gen+AI';"
+            />
           </a>
           <div class="p-5">
-            <a
-              href="certificates/gen ai.png"
-              target="_blank"
-            >
+            <a href="certificates/gen ai.png" target="_blank">
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
-                Basic GEN AI course 
+                Basic GEN AI Course
               </h5>
-            </a>
             </a>
           </div>
         </div>
-        <!--7th-->
+        <!-- Certificate Card 7 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="certificate-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <a 
-            href="certificates/python_sololearn.jpg" target="_blank"
-          >
-            <img class="rounded-t-lg" src="certificates/python_sololearn.jpg" alt="certificate 1" />
+          <a href="certificates/python_sololearn.jpg" target="_blank">
+            <img
+              class="rounded-t-lg"
+              src="certificates/python_sololearn.jpg"
+              alt="Introduction to Python"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Python+Course';"
+            />
           </a>
           <div class="p-5">
-            <a
-              href="certificates/python_sololearn.jpg"
-              target="_blank"
-            >
+            <a href="certificates/python_sololearn.jpg" target="_blank">
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
                 Introduction to Python
               </h5>
             </a>
-            </a>
           </div>
         </div>
-        <!--8th-->
+        <!-- Certificate Card 8 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="certificate-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <a 
-            href="certificates/vibe_coding.jpg" target="_blank"
-          >
-            <img class="rounded-t-lg" src="certificates/vibe_coding.jpg" alt="certificate 1" />
+          <a href="certificates/vibe_coding.jpg" target="_blank">
+            <img
+              class="rounded-t-lg"
+              src="certificates/vibe_coding.jpg"
+              alt="Vibe Coding"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Vibe+Coding';"
+            />
           </a>
           <div class="p-5">
-            <a
-              href="certificates/vibe_coding.jpg"
-              target="_blank"
-            >
+            <a href="certificates/vibe_coding.jpg" target="_blank">
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
                 Vibe Coding
               </h5>
             </a>
-            </a>
           </div>
-          
         </div>
-        <!--copy from here-->
+        <!-- Certificate Card 9 -->
         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="certificate-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <a 
-            href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=F3B98B23C1297487C5DE93FB0143E5C0B5F6EFD94E8E36926F6121AF9ED70ACA" target="_blank"
+          <a
+            href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=F3B98B23C1297487C5DE93FB0143E5C0B5F6EFD94E8E36926F6121AF9ED70ACA"
+            target="_blank"
           >
-            <img class="rounded-t-lg" src="certificates/oracle.png" alt="certificate 1" />
+            <img
+              class="rounded-t-lg"
+              src="certificates/oracle.png"
+              alt="Oracle Cloud Infrastructure 2025"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Oracle+Cloud';"
+            />
           </a>
           <div class="p-5">
             <a
@@ -721,22 +752,22 @@
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
-              <br>
                 Oracle Cloud Infrastructure 2025
               </h5>
             </a>
-            </a>
           </div>
         </div>
-        <!--up to-->
-
-         <div
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        <!-- Certificate Card 10 -->
+        <div
+          class="certificate-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <a 
-            href="https://moonshot.scaler.com/s/sl/W5VFqMNCFI" target="_blank"
-          >
-            <img class="rounded-t-lg" src="certificates/scalar.png" alt="certificate 1" />
+          <a href="https://moonshot.scaler.com/s/sl/W5VFqMNCFI" target="_blank">
+            <img
+              class="rounded-t-lg"
+              src="certificates/scalar.png"
+              alt="Scalar: Python and SQL for Data Science"
+              onerror="this.src='https://via.placeholder.com/300x200?text=Scalar+Course';"
+            />
           </a>
           <div class="p-5">
             <a
@@ -746,19 +777,156 @@
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 dark:text-purple-400"
               >
-               Scalar :  Python and SQL for Data Science 
+                Scalar: Python and SQL for Data Science
               </h5>
             </a>
-            </a>
           </div>
-          
         </div>
-        <!--up to-->
-        
-        
+      </div>
     </section>
 
-    <!-- Flowbite Scripts -->
+    <!-- Flowbite and GSAP Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script>
+      // Ensure GSAP is loaded
+      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+        console.error(
+          "GSAP or ScrollTrigger not loaded. Falling back to static display."
+        );
+        document
+          .querySelectorAll(
+            ".project-card, .certificate-card, .nav-link, .section-title, .logo"
+          )
+          .forEach((el) => {
+            el.classList.add("fallback-hidden");
+          });
+      } else {
+        // Initialize GSAP animations
+        document.addEventListener("DOMContentLoaded", () => {
+          // Ensure content is visible initially
+          gsap.set(
+            ".project-card, .certificate-card, .nav-link, .section-title, .logo",
+            {
+              opacity: 1,
+              y: 0,
+              x: 0,
+            }
+          );
+
+          // Animate logo
+          gsap.from(".logo", {
+            opacity: 0,
+            x: -50,
+            duration: 1,
+            ease: "power3.out",
+            onComplete: () => console.log("Logo animation completed"),
+          });
+
+          // Animate nav links with stagger
+          gsap.from(".nav-link", {
+            opacity: 0,
+            x: -20,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.5,
+            onComplete: () => console.log("Nav links animation completed"),
+          });
+
+          // Animate section titles
+          gsap.from(".section-title", {
+            scrollTrigger: {
+              trigger: ".section-title",
+              start: "top 90%",
+              toggleActions: "play none none reset",
+            },
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            ease: "power3.out",
+            onComplete: () => console.log("Section title animation completed"),
+          });
+
+          // Animate project cards
+          gsap.from(".project-card", {
+            scrollTrigger: {
+              trigger: ".projects-section",
+              start: "top 90%",
+              toggleActions: "play none none reset",
+            },
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            stagger: 0.3,
+            ease: "power3.out",
+            onComplete: () => console.log("Project cards animation completed"),
+          });
+
+          // Animate certificate cards
+          gsap.from(".certificate-card", {
+            scrollTrigger: {
+              trigger: ".certificates-section",
+              start: "top 90%",
+              toggleActions: "play none none reset",
+            },
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            stagger: 0.3,
+            ease: "power3.out",
+            onComplete: () =>
+              console.log("Certificate cards animation completed"),
+          });
+
+          // Hover animations for project and certificate cards
+          document
+            .querySelectorAll(".project-card, .certificate-card")
+            .forEach((card) => {
+              card.addEventListener("mouseenter", () => {
+                gsap.to(card, {
+                  scale: 1.05,
+                  duration: 0.3,
+                  ease: "power2.out",
+                });
+                gsap.to(card.querySelector("img"), {
+                  scale: 1.1,
+                  duration: 0.3,
+                  ease: "power2.out",
+                });
+              });
+              card.addEventListener("mouseleave", () => {
+                gsap.to(card, {
+                  scale: 1,
+                  duration: 0.3,
+                  ease: "power2.out",
+                });
+                gsap.to(card.querySelector("img"), {
+                  scale: 1,
+                  duration: 0.3,
+                  ease: "power2.out",
+                });
+              });
+            });
+
+          // Parallax effect for images in cards
+          document
+            .querySelectorAll(".project-card img, .certificate-card img")
+            .forEach((img) => {
+              gsap.to(img, {
+                scrollTrigger: {
+                  trigger: img,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 1,
+                },
+                y: -20,
+                ease: "none",
+              });
+            });
+        });
+      }
+    </script>
   </body>
 </html>
+<!---->
+<!--chnage made is upper side-->

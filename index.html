@@ -12,10 +12,17 @@
       rel="stylesheet"
     />
 
+    <!-- GSAP for Cursor Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- Spline Viewer for Cursor and Background -->
+    <script
+      type="module"
+      src="https://unpkg.com/@splinetool/viewer@1.0.47/build/spline-viewer.js"
+    ></script>
+
     <!-- Standard Favicon -->
     <link rel="icon" href="favicons/favicon.ico" type="image/x-icon" />
-
-    <!-- PNG Favicons for modern browsers -->
     <link
       rel="icon"
       type="image/png"
@@ -28,7 +35,6 @@
       sizes="32x32"
       href="favicons/favicon-32x32.png"
     />
-
     <link
       rel="icon"
       type="image/png"
@@ -42,30 +48,27 @@
       href="favicons/android-chrome-512x512.png"
     />
 
-    <!-- Favicon -->
-
     <!-- Custom Animation Styles -->
     <style>
-      .typing-container {
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 2s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .typewriter {
         display: inline-block;
         white-space: nowrap;
         overflow: hidden;
-        border-right: 2px solid #9333ea; /* Thinner cursor, closer to text */
-        animation: typing 3s steps(18, end) infinite,
-          blink 0.7s step-end infinite, glow 3s ease-in-out infinite;
-        width: 0;
-      }
-
-      @keyframes typing {
-        0% {
-          width: 0;
-        }
-        80% {
-          width: 100%;
-        } /* Hold briefly at full width */
-        100% {
-          width: 100%;
-        } /* Smooth reset */
+        border-right: 2px solid #9333ea;
+        animation: blink 0.7s step-end infinite;
       }
 
       @keyframes blink {
@@ -79,32 +82,75 @@
         }
       }
 
-      @keyframes glow {
-        0%,
-        100% {
-          text-shadow: 0 0 5px rgba(147, 51, 234, 0.3);
-        }
-        50% {
-          text-shadow: 0 0 15px rgba(147, 51, 234, 0.7);
+      /* Spline Cursor Styles */
+      .spline-cursor {
+        position: fixed;
+        width: 80px;
+        height: 80px;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        opacity: 1; /* Ensure visibility */
+      }
+
+      .spline-cursor.hovered {
+        transform: translate(-50%, -50%) scale(1.3);
+      }
+
+      /* Fallback 2D Cursor */
+      .fallback-cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(
+          circle,
+          rgba(147, 51, 234, 0.8) 20%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        display: none; /* Hidden unless Spline fails */
+      }
+
+      .fallback-cursor.hovered {
+        width: 40px;
+        height: 40px;
+        background: radial-gradient(
+          circle,
+          rgba(147, 51, 234, 1) 20%,
+          transparent 70%
+        );
+        border: 2px solid #9333ea;
+      }
+
+      /* Hide default cursor on desktop */
+      @media (hover: hover) and (pointer: fine) {
+        body {
+          cursor: none;
         }
       }
 
-      .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeIn 2s ease-out forwards;
-      }
-
-      @keyframes fadeIn {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      /* Ensure Spline background is behind cursor */
+      .spline-background {
+        z-index: 0;
       }
     </style>
   </head>
 
   <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+    <!-- Custom Spline Cursor -->
+    <div class="spline-cursor" id="spline-cursor">
+      <spline-viewer
+        url="https://prod.spline.design/8j6y9p8x8k9P0z3Q/scene.splinecode"
+        style="width: 100%; height: 100%"
+      ></spline-viewer>
+    </div>
+    <!-- Fallback 2D Cursor -->
+    <div class="fallback-cursor" id="fallback-cursor"></div>
+
     <!-- Navigation -->
     <nav class="bg-white border-gray-200 dark:bg-gray-900 shadow-md">
       <div
@@ -118,11 +164,12 @@
             src="images/binod.jpg"
             class="h-10 rounded-full"
             alt="Binod Logo"
+            onerror="this.src='https://via.placeholder.com/40?text=Binod';"
           />
           <span
             class="self-center text-2xl font-semibold whitespace-nowrap text-purple-600 dark:text-purple-400"
           >
-            <pre>< Binod/></pre>
+            <pre>&lt; Binod/&gt;</pre>
           </span>
         </a>
         <button
@@ -197,11 +244,7 @@
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center">
       <!-- Background Spline -->
-      <div class="absolute inset-0 z-0">
-        <script
-          type="module"
-          src="https://unpkg.com/@splinetool/viewer@1.0.47/build/spline-viewer.js"
-        ></script>
+      <div class="absolute inset-0 spline-background">
         <spline-viewer
           url="https://prod.spline.design/0b3a4f4f-0f7a-4b3b-9c1b-4b3b9c1b4b3b/scene.splinecode"
           style="width: 100%; height: 100%"
@@ -214,13 +257,15 @@
           class="text-5xl md:text-7xl font-bold text-purple-600 dark:text-purple-400 mb-4 fade-in"
           style="animation-delay: 0.5s"
         >
-          <pre>< Hello World !></pre>
+          <pre>&lt; Hello World !&gt;</pre>
         </h1>
         <p
           class="text-lg md:text-2xl text-gray-700 dark:text-gray-300 mb-6 fade-in"
           style="animation-delay: 0.8s"
         >
-          <span class="typing-container text-gray-700 dark:text-gray-400"
+          <span
+            id="typewriter"
+            class="typewriter text-gray-700 dark:text-gray-400"
             >I am Binod Raj Pant</span
           >
         </p>
@@ -236,5 +281,145 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script>
+      // Typewriter Effect (Unchanged)
+      const phrases = [
+        "I am Binod Raj Pant !.",
+        "I am Computer Engineering Student .",
+        "I am AI, ML, Data Science Enthusiast .",
+        "I am Vibe coder .",
+      ];
+      const typewriter = document.getElementById("typewriter");
+      let phraseIndex = 0;
+      let charIndex = 4; // Start after "I am "
+      let isDeleting = false;
+      const typingSpeed = 100; // ms per character
+      const deletingSpeed = 50; // ms per character
+      const pauseTime = 1000; // Pause at full phrase
+      const startPause = 500; // Pause before starting next phrase
+
+      function type() {
+        const currentPhrase = phrases[phraseIndex];
+        const displayText = currentPhrase.substring(0, charIndex);
+
+        typewriter.textContent = displayText;
+
+        if (!isDeleting && charIndex < currentPhrase.length) {
+          charIndex++;
+          setTimeout(type, typingSpeed);
+        } else if (isDeleting && charIndex > 4) {
+          charIndex--;
+          setTimeout(type, deletingSpeed);
+        } else if (!isDeleting && charIndex === currentPhrase.length) {
+          isDeleting = true;
+          setTimeout(type, pauseTime);
+        } else if (isDeleting && charIndex === 4) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          setTimeout(type, startPause);
+        }
+      }
+
+      setTimeout(type, 1000); // Initial delay before typing starts
+
+      // Spline Cursor Animation
+      document.addEventListener("DOMContentLoaded", () => {
+        const splineCursor = document.getElementById("spline-cursor");
+        const fallbackCursor = document.getElementById("fallback-cursor");
+
+        // Check if GSAP and Spline are loaded
+        if (
+          typeof gsap !== "undefined" &&
+          typeof SplineViewer !== "undefined"
+        ) {
+          // Follow mouse movement
+          document.addEventListener("mousemove", (e) => {
+            gsap.to(splineCursor, {
+              x: e.clientX,
+              y: e.clientY,
+              duration: 0.2,
+              ease: "power3.out",
+            });
+          });
+
+          // Hover effects for interactive elements
+          const hoverables = document.querySelectorAll("a, button");
+          hoverables.forEach((el) => {
+            el.addEventListener("mouseenter", () => {
+              splineCursor.classList.add("hovered");
+              gsap.to(splineCursor, {
+                scale: 1.3,
+                duration: 0.3,
+                ease: "elastic.out(1, 0.3)",
+              });
+            });
+            el.addEventListener("mouseleave", () => {
+              splineCursor.classList.remove("hovered");
+              gsap.to(splineCursor, {
+                scale: 1,
+                duration: 0.3,
+                ease: "elastic.out(1, 0.3)",
+              });
+            });
+          });
+
+          // Hide cursor when mouse leaves the window
+          document.addEventListener("mouseleave", () => {
+            gsap.to(splineCursor, { opacity: 0, duration: 0.2 });
+          });
+          document.addEventListener("mouseenter", () => {
+            gsap.to(splineCursor, { opacity: 1, duration: 0.2 });
+          });
+
+          // Check if Spline cursor loads successfully
+          const splineViewer = splineCursor.querySelector("spline-viewer");
+          splineViewer.addEventListener("load", () => {
+            console.log("Spline cursor loaded successfully");
+          });
+          splineViewer.addEventListener("error", () => {
+            console.error(
+              "Spline cursor failed to load, switching to fallback"
+            );
+            splineCursor.style.display = "none";
+            fallbackCursor.style.display = "block";
+            animateFallbackCursor();
+          });
+        } else {
+          console.warn("GSAP or Spline not loaded. Using fallback cursor.");
+          splineCursor.style.display = "none";
+          fallbackCursor.style.display = "block";
+          animateFallbackCursor();
+        }
+
+        // Fallback cursor animation
+        function animateFallbackCursor() {
+          document.addEventListener("mousemove", (e) => {
+            gsap.to(fallbackCursor, {
+              x: e.clientX,
+              y: e.clientY,
+              duration: 0.2,
+              ease: "power3.out",
+            });
+          });
+
+          const hoverables = document.querySelectorAll("a, button");
+          hoverables.forEach((el) => {
+            el.addEventListener("mouseenter", () => {
+              fallbackCursor.classList.add("hovered");
+            });
+            el.addEventListener("mouseleave", () => {
+              fallbackCursor.classList.remove("hovered");
+            });
+          });
+
+          document.addEventListener("mouseleave", () => {
+            gsap.to(fallbackCursor, { opacity: 0, duration: 0.2 });
+          });
+          document.addEventListener("mouseenter", () => {
+            gsap.to(fallbackCursor, { opacity: 1, duration: 0.2 });
+          });
+        }
+      });
+    </script>
   </body>
 </html>

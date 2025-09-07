@@ -3,18 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.css" />
+    <title>Binod - Skills</title>
+
+    <!-- Tailwind CSS & Flowbite -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
       rel="stylesheet"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Binod - Skills</title>
 
     <!-- Standard Favicon -->
     <link rel="icon" href="favicons/favicon.ico" type="image/x-icon" />
-
-    <!-- PNG Favicons for modern browsers -->
     <link
       rel="icon"
       type="image/png"
@@ -27,7 +26,6 @@
       sizes="32x32"
       href="favicons/favicon-32x32.png"
     />
-
     <link
       rel="icon"
       type="image/png"
@@ -41,7 +39,7 @@
       href="favicons/android-chrome-512x512.png"
     />
 
-    <!-- Favicon -->
+    <!-- Custom Styles -->
     <style>
       .progress-bar {
         transition: width 1.5s ease-out;
@@ -52,6 +50,41 @@
       .empty {
         width: 0 !important;
         stroke-dashoffset: 251.2 !important;
+      }
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .typewriter {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 2px solid #9333ea;
+        animation: blink 0.7s step-end infinite;
+      }
+      @keyframes blink {
+        0%,
+        50% {
+          border-color: #9333ea;
+        }
+        51%,
+        100% {
+          border-color: transparent;
+        }
+      }
+      .progress-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1rem;
+        font-weight: bold;
+        color: #ffffff;
       }
     </style>
   </head>
@@ -73,7 +106,7 @@
           <span
             class="self-center text-2xl font-semibold whitespace-nowrap text-purple-600 dark:text-purple-400"
           >
-            <pre> < Binod/></pre>
+            <pre>&lt; Binod/&gt;</pre>
           </span>
         </a>
         <button
@@ -150,78 +183,11 @@
       <h2
         class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-8 text-center"
       >
-        My <span class="text-cyan-400">Skills</span>
+        My <span id="typewriter" class="typewriter text-cyan-400">Skills</span>
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Technical Skills -->
-        <!--<div>
-  <h3 class="text-2xl font-semibold mb-4 underline underline-offset-4">
-    Technical Skills
-  </h3>
-  <div class="space-y-4">
-    <div>
-      <p class="flex justify-between mb-1">
-        <span>HTML</span><span>70%</span>
-      </p>
-      <div class="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700">
-        <div class="progress-bar empty bg-cyan-400 h-2.5 rounded-full" style="width: 70%"></div>
-      </div>
-    </div>
-    <div>
-      <p class="flex justify-between mb-1">
-        <span>CSS</span><span>50%</span>
-      </p>
-      <div class="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700">
-        <div class="progress-bar empty bg-cyan-400 h-2.5 rounded-full" style="width: 50%"></div>
-      </div>
-    </div>
-    <div>
-      <p class="flex justify-between mb-1">
-        <span>Java</span><span>78%</span>
-      </p>
-      <div class="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700">
-        <div class="progress-bar empty bg-cyan-400 h-2.5 rounded-full" style="width: 78%"></div>
-      </div>
-    </div>
-    <div>
-      <p class="flex justify-between mb-1">
-        <span>Python</span><span>85%</span>
-      </p>
-      <div class="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700">
-        <div class="progress-bar empty bg-cyan-400 h-2.5 rounded-full" style="width: 85%"></div>
-      </div>
-    </div>
-    <div>
-      <p class="flex justify-between mb-1">
-        <span>Flask</span><span>88%</span>
-      </p>
-      <div class="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700">
-        <div class="progress-bar empty bg-cyan-400 h-2.5 rounded-full" style="width: 88%"></div>
-      </div>
-    </div>
-    <div>
-      <p class="flex justify-between mb-1">
-        <span>Tailwind</span><span>45%</span>
-      </p>
-      <div class="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700">
-        <div class="progress-bar empty bg-cyan-400 h-2.5 rounded-full" style="width: 45%"></div>
-      </div>
-    </div>
-    <div>
-      <p class="flex justify-between mb-1">
-        <span>Django</span><span>72%</span>
-      </p>
-      <div class="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700">
-        <div class="progress-bar empty bg-cyan-400 h-2.5 rounded-full" style="width: 72%"></div>
-      </div>
-    </div>
-  </div>
-</div>
--->
-        <!--
-        <!-- Technical Skills -->
-
-        <div>
+        <div class="fade-in">
           <h3 class="text-2xl font-semibold mb-4 underline underline-offset-4">
             Technical Skills
           </h3>
@@ -254,40 +220,40 @@
             </div>
             <div>
               <p class="flex justify-between mb-1">
-                <span>Java</span><span>78%</span>
+                <span>Java</span><span>59%</span>
               </p>
               <div
                 class="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700"
               >
                 <div
                   class="progress-bar empty bg-cyan-400 h-2.5 rounded-full"
-                  style="width: 78%"
+                  style="width: 59%"
                 ></div>
               </div>
             </div>
             <div>
               <p class="flex justify-between mb-1">
-                <span>Python</span><span>85%</span>
+                <span>Python</span><span>70%</span>
               </p>
               <div
                 class="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700"
               >
                 <div
                   class="progress-bar empty bg-cyan-400 h-2.5 rounded-full"
-                  style="width: 85%"
+                  style="width: 70%"
                 ></div>
               </div>
             </div>
             <div>
               <p class="flex justify-between mb-1">
-                <span>Flask</span><span>88%</span>
+                <span>Flask</span><span>70%</span>
               </p>
               <div
                 class="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700"
               >
                 <div
                   class="progress-bar empty bg-cyan-400 h-2.5 rounded-full"
-                  style="width: 88%"
+                  style="width: 70%"
                 ></div>
               </div>
             </div>
@@ -306,14 +272,14 @@
             </div>
             <div>
               <p class="flex justify-between mb-1">
-                <span>Django</span><span>72%</span>
+                <span>Django</span><span>66%</span>
               </p>
               <div
                 class="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700"
               >
                 <div
                   class="progress-bar empty bg-cyan-400 h-2.5 rounded-full"
-                  style="width: 72%"
+                  style="width: 66%"
                 ></div>
               </div>
             </div>
@@ -321,12 +287,12 @@
         </div>
 
         <!-- Professional Skills -->
-        <div>
+        <div class="fade-in">
           <h3 class="text-2xl font-semibold mb-4 underline underline-offset-4">
             Professional Skills
           </h3>
           <div class="grid grid-cols-2 gap-6">
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center relative">
               <div class="relative">
                 <svg class="w-24 h-24">
                   <circle
@@ -350,14 +316,11 @@
                     transform="rotate(-90 48 48)"
                   />
                 </svg>
-                <span
-                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold"
-                  >90%</span
-                >
+                <span class="progress-text">84%</span>
               </div>
               <p class="mt-2">Creativity</p>
             </div>
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center relative">
               <div class="relative">
                 <svg class="w-24 h-24">
                   <circle
@@ -381,14 +344,11 @@
                     transform="rotate(-90 48 48)"
                   />
                 </svg>
-                <span
-                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold"
-                  >65%</span
-                >
+                <span class="progress-text">78%</span>
               </div>
               <p class="mt-2">Communication</p>
             </div>
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center relative">
               <div class="relative">
                 <svg class="w-24 h-24">
                   <circle
@@ -412,14 +372,11 @@
                     transform="rotate(-90 48 48)"
                   />
                 </svg>
-                <span
-                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold"
-                  >75%</span
-                >
+                <span class="progress-text">75%</span>
               </div>
               <p class="mt-2">Problem Solving</p>
             </div>
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center relative">
               <div class="relative">
                 <svg class="w-24 h-24">
                   <circle
@@ -443,10 +400,7 @@
                     transform="rotate(-90 48 48)"
                   />
                 </svg>
-                <span
-                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold"
-                  >85%</span
-                >
+                <span class="progress-text">85%</span>
               </div>
               <p class="mt-2">Teamwork</p>
             </div>
@@ -455,18 +409,56 @@
       </div>
     </section>
 
-    <!-- Flowbite Scripts -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script>
+      // Typewriter Animation
+      const phrases = [
+        "My Technical Skills",
+        "My Professional Skills",
+
+        "My Expertise",
+      ];
+      const typewriter = document.getElementById("typewriter");
+      let phraseIndex = 0;
+      let charIndex = 1; // Start after "My"
+      let isDeleting = false;
+      const typingSpeed = 100; // ms per character
+      const deletingSpeed = 50; // ms per character
+      const pauseTime = 1000; // Pause at full phrase
+      const startPause = 500; // Pause before next phrase
+
+      function type() {
+        const currentPhrase = phrases[phraseIndex];
+        const displayText = currentPhrase.substring(2, charIndex);
+        typewriter.textContent = displayText;
+
+        if (!isDeleting && charIndex < currentPhrase.length) {
+          charIndex++;
+          setTimeout(type, typingSpeed);
+        } else if (isDeleting && charIndex > 2) {
+          charIndex--;
+          setTimeout(type, deletingSpeed);
+        } else if (!isDeleting && charIndex === currentPhrase.length) {
+          isDeleting = true;
+          setTimeout(type, pauseTime);
+        } else if (isDeleting && charIndex === 2) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          setTimeout(type, startPause);
+        }
+      }
+      setTimeout(type, 1000);
+
+      // Progress Bar and Circle Animations
       window.onload = function animateSkills() {
         const progressBars = document.querySelectorAll(".progress-bar");
         const progressCircles = document.querySelectorAll(".progress-circle");
 
         progressBars.forEach((bar) => {
-          // Use the inline style width as the target
-          const targetWidth = parseInt(bar.style.width, 10) || 0; // Fallback to 0 if parsing fails
+          const targetWidth = parseInt(bar.style.width, 10) || 0;
           let width = 0;
-          const duration = 1500; // 1.5 seconds
+          const duration = 1500;
           const startTime = performance.now();
 
           function animate(time) {
@@ -483,13 +475,12 @@
         });
 
         progressCircles.forEach((circle) => {
-          // Find the percentage span within the parent .flex div
           const parentDiv = circle.closest(".flex");
-          const percentageSpan = parentDiv.querySelector("span");
+          const percentageSpan = parentDiv.querySelector(".progress-text");
           const percentage = parseInt(percentageSpan.textContent, 10) || 0;
           const targetOffset = 251.2 * (1 - percentage / 100);
           let offset = 251.2;
-          const duration = 1500; // 1.5 seconds
+          const duration = 1500;
           const startTime = performance.now();
 
           function animate(time) {
@@ -505,6 +496,23 @@
           requestAnimationFrame(animate);
         });
       };
+
+      // Fade-in Animation for Skill Cards
+      document.addEventListener("DOMContentLoaded", function () {
+        const fadeElements = document.querySelectorAll(".fade-in");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+        fadeElements.forEach((el) => observer.observe(el));
+      });
     </script>
   </body>
 </html>
